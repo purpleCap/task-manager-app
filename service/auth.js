@@ -8,6 +8,11 @@ AuthService.signup = (payload) => AxiosRequest.post(
     payload
 );
 
+AuthService.reset = (payload) => AxiosRequest.post(
+    `/api/${route.auth}/reset`,
+    payload
+);
+
 AuthService.login = (payload) => AxiosRequest.post(
     `/api/${route.auth}/login`,
     payload

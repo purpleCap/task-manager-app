@@ -9,7 +9,8 @@ import {
   import Reac, {useState, useEffect} from 'react';
   import color from '../../constants/color';
   import fontFamily from '../../constants/fontFamily';
-  import { TextInput, HelperText } from 'react-native-paper';
+  import { TextInput, HelperText, Icon } from 'react-native-paper';
+import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/outline';
   
   const {width, height} = Dimensions.get('window');
   
@@ -67,7 +68,8 @@ import {
             label={fieldName}
             keyboardType={keyboardType}
             placeholder={placeholder}
-            right={secureTextEntry ? <TextInput.Icon color={isSecure ? color.PRIMARY : color.GREY_DARKEST} icon={"eye"} onPress={() => setIsSecure(p => !p)} /> : (affix ? <TextInput.Affix text={`/${affix}`} /> : null)}
+            // right={secureTextEntry ? <TextInput.Icon color={isSecure ? color.PRIMARY : color.GREY_DARKEST} icon={"eye"} onPress={() => setIsSecure(p => !p)} /> : (affix ? <TextInput.Affix text={`/${affix}`} /> : null)}
+            right={affix ? <TextInput.Affix text={`/${affix}`} /> : null}
             textColor={color.GREY_DARKER}
             theme={{
               roundness: 5,
@@ -80,7 +82,7 @@ import {
             }}
             multiline={multiline}
             // outlineColor={color.PRIMARY}
-            
+            error={value.isError}
             // onFocus={customOnFocus}
             // onBlur={customOnBlur}
             onChangeText={setValue}
@@ -88,6 +90,7 @@ import {
             numberOfLines={noOfLines}
             scrollEnabled={multiline}
         />
+        {secureTextEntry && <View style={styles.icon}>{!isSecure ? <EyeIcon strokeWidth={1.8} size={24} color={color.PRIMARY} onPress={() => setIsSecure(p => !p)} /> : <EyeSlashIcon strokeWidth={1.8} size={24} color={color.PRIMARY} onPress={() => setIsSecure(p => !p)} />}</View>}
         {value.isError && <HelperText type="error" visible={value.isError} style={{position: "absolute", bottom: -1*height*0.028, left: -10}}>
           {value.errorMsg}
         </HelperText>}
@@ -145,5 +148,11 @@ import {
       letterSpacing: 0.8,
       marginTop: 2,
     },
+    icon: {
+      position: "absolute",
+      right: '2.5%',
+      top: '35%'
+
+    }
   });
   

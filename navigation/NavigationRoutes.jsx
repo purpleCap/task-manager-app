@@ -7,6 +7,7 @@ import Signup from '../screens/Signup';
 import Home from '../screens/Home';
 import Details from '../screens/Details';
 import AddEdit from '../screens/AddEdit';
+import ResetPassword from '../screens/ResetPassword';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ function NavigationRoutes() {
       <Stack.Screen name="HomeScreen" component={Home} />
       <Stack.Screen name="DetailsScreen" component={Details} />
       <Stack.Screen name="AddEditScreen" component={AddEdit} />
+      <Stack.Screen name="ResetScreen" component={ResetPassword} />
     </Stack.Navigator>
   );
 }
