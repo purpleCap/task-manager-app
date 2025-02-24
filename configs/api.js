@@ -10,7 +10,7 @@ const service =  axios.create({
 
 service.interceptors.request.use(async (config) => {
     const accessToken = await AsyncStorage.getItem(ACCESS_KEY);
-    console.log("accessToken", accessToken);
+    // console.log("accessToken", accessToken);
     console.log("INTERCEPTOR REQUEST", JSON.stringify(config));
     if(accessToken) {
         if(!config.headers['Authorization']) {
@@ -29,12 +29,6 @@ service.interceptors.response.use(response => response.data,
             if(error.response.data?.statusCode === 403) {
                 store.dispatch(addUserData({userData: null}));
             }
-            // if(error?.response?.status === 400) {
-            //     console.log(error)
-            //     return error.response.data;
-            // }
-            // localStorage.clear()
-            // toast.error("An error has occured");
             return Promise.reject(error.response.data);
         })
 
