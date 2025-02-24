@@ -169,8 +169,10 @@ function Login({navigation}) {
                 Remember me
               </Text>
             </View> */}
-            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("ResetScreen")}>
-              <Text style={[styles.inputFieldName, {fontSize: 14, textDecorationLine: "underline"}]}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.navigate('ResetScreen')}>
+              <Text style={[styles.inputFieldName, styles.reset]}>
                 Reset password
               </Text>
             </TouchableOpacity>
@@ -273,5 +275,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: 1.1,
     fontFamily: fontFamily.promaryFontFamily,
+  },
+  reset: {
+    fontSize: 14, 
+    textDecorationLine: 'underline', 
+    color: color.PRIMARY
   },
 });
