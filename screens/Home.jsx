@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUserData, addUserTasks } from '../store/user';
 import SafeAreaContainer from '../components/Template/SafeAreaContainer';
 import { RefreshControl } from 'react-native-gesture-handler';
+import fontFamily from '../constants/fontFamily';
+import NoData from '../components/Template/NoData';
 const {height, width} = Dimensions.get('window');
 
 // const data = [
@@ -100,7 +102,11 @@ const Home = ({navigation}) => {
   }, [userData]))
 
   return (
-    <SafeAreaContainer>
+    <SafeAreaContainer style={{
+      justifyContent: !loading && data.length === 0 ? "center" : "space-between",
+      alignItems: "center"
+    }}>
+      { !loading && data.length === 0 && <NoData message='No Task Found'/>}
       <FlatList
         data={data}
         renderItem={({item}) => <TaskTemplate item={item} navigation={navigation} />}

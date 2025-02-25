@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
 import color from '../../constants/color';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useToast } from 'react-native-toast-notifications';
 import ApiLoaderAnimated from '../Loader/ApiLoaderAnimated';
 
-export default function SafeAreaContainer({children, style={}}) {
+function SafeAreaContainer({children, style={}}) {
   const toast = useToast();
   const navigation = useNavigation();
   const userData = useSelector(state => state.userDetails.userData);
@@ -20,6 +20,7 @@ export default function SafeAreaContainer({children, style={}}) {
   const logoutHandler = useCallback(() => {
     AsyncStorage.clear().then(() => {
       // dispatch(addUserData({userData: null}));
+      dispatch(addIs403({is403: false}));
       dispatch(addUserTasks({tasks: []}));
       toast.show("", {
         data: {
@@ -37,7 +38,6 @@ export default function SafeAreaContainer({children, style={}}) {
     console.log("UD", userData)
     if(is403 && !userData) {
       logoutHandler();
-      dispatch(addIs403({is403: false}));
     }
   }, [userData, is403]));
 
@@ -55,3 +55,5 @@ export default function SafeAreaContainer({children, style={}}) {
     </>
   );
 }
+
+export default memo(SafeAreaContainer);
