@@ -2,7 +2,7 @@ import axios from 'axios';
 import {ACCESS_KEY, API_BASE_URL} from '../constants/common';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {store} from '../store/store';
-import {addLoading, addUserData} from '../store/user';
+import {addIs403, addLoading, addUserData} from '../store/user';
 
 const service = axios.create({
   baseURL: API_BASE_URL,
@@ -11,9 +11,8 @@ const service = axios.create({
 service.interceptors.request.use(
   async config => {
     const accessToken = await AsyncStorage.getItem(ACCESS_KEY);
-    // console.log("accessToken", accessToken);
     store.dispatch(addLoading({isLoading: true}));
-    console.log('INTERCEPTOR REQUEST', JSON.stringify(config));
+    // console.log('INTERCEPTOR REQUEST', JSON.stringify(config));
     if (accessToken) {
       if (!config.headers['Authorization']) {
         config.headers['Authorization'] = `Bearer ${accessToken}`;
@@ -33,12 +32,13 @@ service.interceptors.response.use(
     return response.data;
   },
   async error => {
+    console.log(error);
     store.dispatch(addLoading({isLoading: false}));
-    console.log(error.response.data);
-    if (error.response.data?.statusCode === 403) {
+    if (error?.response?.data?.statusCode === 403) {
       store.dispatch(addUserData({userData: null}));
+      store.dispatch(addIs403({is403: true}));
     }
-    return Promise.reject(error.response.data);
+    return Promise.reject(error?.response?.data ?? error);
   },
 );
 

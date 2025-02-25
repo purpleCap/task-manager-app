@@ -5,7 +5,8 @@ const userDetails = createSlice({
     initialState: {
         userData: null,
         tasks: [],
-        isLoading: false
+        isLoading: false,
+        is403: false
     },
     reducers: {
         setUserData: (state, action) => {
@@ -17,12 +18,16 @@ const userDetails = createSlice({
         setLoading: (state, action) => {
             state.isLoading = action.payload.isLoading
         },
+        setIs403: (state, action) => {
+            state.is403 = action.payload.is403
+        },
     }
 })
 
 export const addUserData = userDetails.actions.setUserData;
 export const addUserTasks = userDetails.actions.setUserTasks;
 export const addLoading = userDetails.actions.setLoading;
+export const addIs403 = userDetails.actions.setIs403;
 
 
 export default userDetails.reducer;

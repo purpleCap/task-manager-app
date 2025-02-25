@@ -40,9 +40,11 @@ const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const logoutHandler = useCallback(() => {
     AsyncStorage.clear().then(() => {
-      navigation.replace("LoginScreen");
       dispatch(addUserData({userData: null}));
       dispatch(addUserTasks({tasks: []}));
+      setTimeout(() => {
+        navigation.replace("LoginScreen");
+      }, 300)
     });
   }, [])
     useFocusEffect(
