@@ -16,6 +16,7 @@ import fontFamily from '../constants/fontFamily';
 import { validateEmail } from '../common/utils';
 import AuthService from '../service/auth';
 import { useFocusEffect } from '@react-navigation/native';
+import SafeAreaContainer from '../components/Template/SafeAreaContainer';
   
   const {width, height} = Dimensions.get('window');
   function ResetPassword({navigation}) {
@@ -132,10 +133,8 @@ import { useFocusEffect } from '@react-navigation/native';
 
     
     return (
-      <SafeAreaView
+      <SafeAreaContainer
         style={{
-          flex: 1,
-          backgroundColor: color.GREY,
           justifyContent: 'center',
           position: 'relative',
         }}>
@@ -206,7 +205,7 @@ import { useFocusEffect } from '@react-navigation/native';
             </View>
           </View>
         </View>
-      </SafeAreaView>
+      </SafeAreaContainer>
     );
   }
   

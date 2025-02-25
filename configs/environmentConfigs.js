@@ -7,7 +7,7 @@ const prod = {
     API_ENDPOINT_URL: 'https://task-manager-s3f3.onrender.com',
   };
   
-  console.log("ENV  ", REACT_APP_ENV);
+  console.log("ENV", REACT_APP_ENV);
   const getEnv = () => {
     switch (REACT_APP_ENV) {
       case 'dev':

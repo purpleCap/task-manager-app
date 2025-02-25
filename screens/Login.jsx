@@ -26,9 +26,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addUserData} from '../store/user';
 import Checkbox from '../components/Inputs/Checkbox';
 import CustomCheckbox from '../components/Inputs/Checkbox';
+import SafeAreaContainer from '../components/Template/SafeAreaContainer';
 
 const {width, height} = Dimensions.get('window');
-function Login({navigation}) {
+function Login({navigation, route}) {
   const toast = useToast();
   const dispatch = useDispatch();
   const [secureText, setSecureText] = useState({
@@ -119,10 +120,8 @@ function Login({navigation}) {
   }
 
   return (
-    <SafeAreaView
+    <SafeAreaContainer
       style={{
-        flex: 1,
-        backgroundColor: color.GREY,
         justifyContent: 'center',
         position: 'relative',
       }}>
@@ -210,7 +209,7 @@ function Login({navigation}) {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </SafeAreaContainer>
   );
 }
 
