@@ -25,7 +25,7 @@ function SafeAreaContainer({children, style={}}) {
       toast.show("", {
         data: {
           status: 'info',
-          heading: 'Session expired, Try login again',
+          heading: 'Logging you out..',
         }
       });
       setTimeout(() => {

@@ -104,7 +104,7 @@ const Home = ({navigation}) => {
   return (
     <SafeAreaContainer style={{
       justifyContent: !loading && data.length === 0 ? "center" : "space-between",
-      alignItems: "center"
+      alignItems: !loading && data.length === 0 ? "center" : ""
     }}>
       { !loading && data.length === 0 && <NoData message='No Task Found'/>}
       <FlatList
