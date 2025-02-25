@@ -4,7 +4,7 @@ import AxiosRequest from '../configs/api';
 const TaskService = {};
 
 TaskService.create = (payload) => AxiosRequest.post(
-    `/api/${route.tasks}/create`,
+    `/api/${route.tasks}`,
     payload
 );
 
