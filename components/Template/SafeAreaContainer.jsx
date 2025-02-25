@@ -7,11 +7,14 @@ import { addUserData, addUserTasks } from '../../store/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useToast } from 'react-native-toast-notifications';
+import ApiLoaderAnimated from '../Loader/ApiLoaderAnimated';
 
 export default function SafeAreaContainer({children, style={}}) {
   const toast = useToast();
   const navigation = useNavigation();
   const userData = useSelector(state => state.userDetails.userData);
+  const isLoading = useSelector(state => state.userDetails.isLoading);
+  console.log("isLoading", isLoading)
   const dispatch = useDispatch();
   const logoutHandler = useCallback(() => {
     AsyncStorage.clear().then(() => {
@@ -36,6 +39,8 @@ export default function SafeAreaContainer({children, style={}}) {
 
   console.log(userData)
   return (
+    <>
+    {isLoading && <ApiLoaderAnimated />}
     <SafeAreaView
       style={{
         flex: 1,
@@ -43,5 +48,6 @@ export default function SafeAreaContainer({children, style={}}) {
         justifyContent: 'space-between',
         ...style
       }}>{children}</SafeAreaView>
+    </>
   );
 }
